@@ -1,37 +1,47 @@
-import type { Frame } from './types';
+import { StandardProfile, type Frame, type VisemeProfile } from './types';
 
-export function detectVisemes(frames: Frame[]): Frame[] {
+export function detectVisemes(
+	frames: Frame[],
+	profile: VisemeProfile = StandardProfile
+): Frame[] {
 	for (const f of frames) {
-		const low = f.low ?? 0;
-		const mid = f.mid ?? 0;
-		const high = f.high ?? 0;
+		// weight to normalize sensitivity
+		const low = (f.low ?? 0) * profile.weights.low;
+		const mid = (f.mid ?? 0) * profile.weights.mid;
+		const high = (f.high ?? 0) * profile.weights.high;
+		const vol = f.volume ?? 0;
 
-		if (f.volume < 0.05) {
+		// silence
+		if (vol < profile.thresholds.silence) {
 			f.viseme = 'rest';
 			continue;
 		}
 
-		if (high > 0.4) {
+		// teeth
+		if (high > profile.thresholds.sibilance && high > mid) {
 			f.viseme = 'teeth';
 			continue;
 		}
 
-		if (mid > 0.45 && f.volume > 0.35) {
+		// open/wide
+		if (mid > profile.thresholds.open && vol > 0.4) {
 			f.viseme = 'open';
 			continue;
 		}
 
-		if (mid > 0.32) {
+		if (mid > profile.thresholds.wide) {
 			f.viseme = 'wide';
 			continue;
 		}
 
-		if (low > 0.5) {
+		// closed/round/wide
+		if (low > profile.thresholds.closed) {
 			f.viseme = 'closed';
-			continue;
+		} else if (low > mid) {
+			f.viseme = 'round';
+		} else {
+			f.viseme = 'wide';
 		}
-
-		f.viseme = 'round';
 	}
 
 	return frames;

@@ -18,7 +18,6 @@ export function attachSpectrum(
 	fps: number
 ) {
 	const samplesPerFrame = Math.floor(sampleRate / fps);
-	console.log(samplesPerFrame);
 
 	frames.forEach((frame, index) => {
 		const start = index * samplesPerFrame;

@@ -61,5 +61,10 @@ export function smooth(frames: Frame[], window = 2): Frame[] {
 export function round(frames: Frame[], precision = 4): void {
 	for (const f of frames) {
 		f.volume = Math.round(f.volume * 10 ** precision) / 10 ** precision;
+
+		if (!f.high || !f.mid || !f.low) continue;
+		f.high = Math.round(f.high * 10 ** precision) / 10 ** precision;
+		f.mid = Math.round(f.mid * 10 ** precision) / 10 ** precision;
+		f.low = Math.round(f.low * 10 ** precision) / 10 ** precision;
 	}
 }

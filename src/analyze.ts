@@ -9,6 +9,7 @@ import { attachSpectrum } from './audio/spectrum';
 import { detectVisemes } from './visemes';
 
 import type { Project } from './types';
+import { HighSensitivityProfile, StandardProfile } from './types';
 
 export function analyzeAudio(
 	file: string,
@@ -32,7 +33,7 @@ export function analyzeAudio(
 	frames = attachSpectrum(frames, samples, sampleRate, fps);
 
 	// Visemes
-	frames = detectVisemes(frames);
+	frames = detectVisemes(frames, StandardProfile);
 
 	round(frames, 6);
 
