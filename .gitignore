@@ -1,3 +1,6 @@
+# project specific
+*.wav
+
 # dependencies (bun install)
 node_modules
 
