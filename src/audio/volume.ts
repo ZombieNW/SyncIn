@@ -58,8 +58,8 @@ export function smooth(frames: Frame[], window = 2): Frame[] {
 	});
 }
 
-export function round(frames: Frame[], precision = 4): Frame[] {
-	return frames.map((f) => ({
-		volume: Math.round(f.volume * 10 ** precision) / 10 ** precision,
-	}));
+export function round(frames: Frame[], precision = 4): void {
+	for (const f of frames) {
+		f.volume = Math.round(f.volume * 10 ** precision) / 10 ** precision;
+	}
 }

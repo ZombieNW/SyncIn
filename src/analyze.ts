@@ -1,5 +1,10 @@
 import { decodeAudio } from './audio/decode';
 import { generateVolumeFrames, normalize, smooth, round } from './audio/volume';
+import {
+	detectSyllables,
+	emphasizeSyllables,
+	markSyllables,
+} from './audio/syllables';
 
 import type { Project } from './types';
 
@@ -11,12 +16,15 @@ export function analyzeAudio(
 	const samples = decodeAudio(file, sampleRate);
 
 	let frames = generateVolumeFrames(samples, sampleRate, fps);
-
 	frames = normalize(frames);
-
 	frames = smooth(frames);
 
-	frames = round(frames);
+	const peaks = detectSyllables(frames);
+
+	frames = emphasizeSyllables(frames, peaks);
+	frames = markSyllables(frames, peaks);
+
+	round(frames, 6);
 
 	return { fps, frames };
 }
