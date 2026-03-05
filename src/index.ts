@@ -1,1 +1,1 @@
-console.log("Hello from SyncIn!");
+console.log("Hello via Bun!!");

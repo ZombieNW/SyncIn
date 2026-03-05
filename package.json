@@ -1,33 +1,21 @@
 {
   "name": "syncin",
+  "module": "src/index.ts",
   "version": "0.1.0",
-  "description": "A procedural lip-sync data generator.",
-  "keywords": [
-    "typescript",
-    "lip-sync",
-    "video"
-  ],
-  "homepage": "https://github.com/ZombieNW/SyncIn#readme",
-  "bugs": {
-    "url": "https://github.com/ZombieNW/SyncIn/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ZombieNW/SyncIn.git"
-  },
+  "repository": "github:ZombieNW/SyncIn",
   "license": "MIT",
   "author": "ZombieNW",
+  "description": "A procedural lip-sync data generator.",
   "type": "module",
-  "main": "index.js",
-  "scripts": {
-    "dev": "tsx src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js"
-  },
+  "private": true,
   "devDependencies": {
-    "@types/node": "^25.3.3",
-    "prettier": "3.8.1",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "@types/bun": "latest",
+    "prettier": "^3.8.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "scripts": {
+    "dev": "tsc --watch"
   }
 }
