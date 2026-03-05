@@ -17,5 +17,8 @@
   },
   "scripts": {
     "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "fft-js": "^0.0.12"
   }
 }

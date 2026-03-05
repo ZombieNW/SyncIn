@@ -5,6 +5,8 @@ import {
 	emphasizeSyllables,
 	markSyllables,
 } from './audio/syllables';
+import { attachSpectrum } from './audio/spectrum';
+import { detectVisemes } from './visemes';
 
 import type { Project } from './types';
 
@@ -15,14 +17,22 @@ export function analyzeAudio(
 ): Project {
 	const samples = decodeAudio(file, sampleRate);
 
+	// Volume
 	let frames = generateVolumeFrames(samples, sampleRate, fps);
 	frames = normalize(frames);
 	frames = smooth(frames);
 
+	// Syllable detection
 	const peaks = detectSyllables(frames);
 
 	frames = emphasizeSyllables(frames, peaks);
 	frames = markSyllables(frames, peaks);
+
+	// Frequency
+	frames = attachSpectrum(frames, samples, sampleRate, fps);
+
+	// Visemes
+	frames = detectVisemes(frames);
 
 	round(frames, 6);
 

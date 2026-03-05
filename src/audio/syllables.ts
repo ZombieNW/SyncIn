@@ -22,7 +22,6 @@ export function detectSyllables(frames: Frame[]): number[] {
 		}
 	}
 
-	console.log('syllables:', peaks.length);
 	return peaks;
 }
 
