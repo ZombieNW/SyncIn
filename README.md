@@ -1,42 +1,13 @@
-# sv
+# SyncIn
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+### _A lipsyncing animation generator._
 
-## Creating a project
+![Language](https://badgen.net/badge/language/TypeScript/blue) ![Language](https://badgen.net/badge/language/Svelte/red) ![Language](https://badgen.net/badge/language/Python/yellow) ![License](https://badgen.net/badge/language/MIT/red)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Disclaimer
 
-```sh
-# create a new project
-npx sv create my-app
-```
+This program is nowhere near completion. It will be developed and improved during the course of video production.
 
-To recreate this project with the same configuration:
+## What ?
 
-```sh
-# recreate this project
-npx sv@0.13.2 create --template minimal --types ts --add prettier tailwindcss="plugins:none" --install npm ./
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+I make [YouTube videos](https://youtube.com/c/ZombieNW) including animated avatars called [Blobs](https://zombienw.com/Blob). As a programmer, I try to ease as much of this animation process as possible. This program is the next step in that.
