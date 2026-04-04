@@ -4,6 +4,10 @@
 	import TimelineTrack from './TimelineTrack.svelte';
 	import TimelineRuler from './TimelineRuler.svelte';
 	import TimelinePlayhead from './TimelinePlayhead.svelte';
+	import TimelineElement from './TimelineAudioElement.svelte';
+	import TimelineEmotionKeyframe from './TimelineEmotionKeyframe.svelte';
+	import TimelineImageElement from './TimelineImageElement.svelte';
+	import TimelineAudioElement from './TimelineAudioElement.svelte';
 
 	let currentFrame = $state(0);
 	let fps = $state(24);
@@ -85,15 +89,20 @@
 				</TimelineTrack>
 
 				<TimelineTrack>
-					<h1>Track 1</h1>
+					<TimelineEmotionKeyframe startFrame={12} {pixelsPerFrame} />
 				</TimelineTrack>
 
 				<TimelineTrack>
-					<h1>Track 2</h1>
+					<TimelineImageElement startFrame={24} {pixelsPerFrame} frameLength={48} label="Face" />
 				</TimelineTrack>
 
 				<TimelineTrack>
-					<h1>Track 3</h1>
+					<TimelineAudioElement
+						startFrame={0}
+						{pixelsPerFrame}
+						frameLength={48}
+						label="Voice Acting"
+					/>
 				</TimelineTrack>
 
 				<TimelinePlayhead {currentFrame} {pixelsPerFrame} />
