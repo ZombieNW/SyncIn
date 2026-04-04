@@ -1,2 +1,17 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+	import ControlGrid from '$lib/components/ControlGrid.svelte';
+</script>
+
+<ControlGrid>
+	{#snippet topLeft()}
+		<h1>Properties</h1>
+	{/snippet}
+
+	{#snippet topRight()}
+		<h1>Video Playback</h1>
+	{/snippet}
+
+	{#snippet bottom()}
+		<h1>Editor</h1>
+	{/snippet}
+</ControlGrid>
