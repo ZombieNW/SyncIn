@@ -4,10 +4,31 @@
 	import TimelineTrack from './TimelineTrack.svelte';
 	import TimelineRuler from './TimelineRuler.svelte';
 	import TimelinePlayhead from './TimelinePlayhead.svelte';
-	import TimelineElement from './TimelineAudioElement.svelte';
 	import TimelineEmotionKeyframe from './TimelineEmotionKeyframe.svelte';
 	import TimelineImageElement from './TimelineImageElement.svelte';
 	import TimelineAudioElement from './TimelineAudioElement.svelte';
+
+	let projectData = $state({
+		audio: [
+			{
+				startFrame: 8,
+				frameLength: 48,
+				label: 'Bee'
+			}
+		],
+		emotion: [
+			{
+				startFrame: 12
+			}
+		],
+		image: [
+			{
+				startFrame: 0,
+				frameLength: 36,
+				label: 'Happy'
+			}
+		]
+	});
 
 	let currentFrame = $state(0);
 	let fps = $state(24);
@@ -89,20 +110,31 @@
 				</TimelineTrack>
 
 				<TimelineTrack>
-					<TimelineEmotionKeyframe startFrame={12} {pixelsPerFrame} />
+					{#each projectData.emotion as element}
+						<TimelineEmotionKeyframe startFrame={element.startFrame} {pixelsPerFrame} />
+					{/each}
 				</TimelineTrack>
 
 				<TimelineTrack>
-					<TimelineImageElement startFrame={24} {pixelsPerFrame} frameLength={48} label="Face" />
+					{#each projectData.image as element}
+						<TimelineImageElement
+							startFrame={element.startFrame}
+							{pixelsPerFrame}
+							frameLength={element.frameLength}
+							label={element.label}
+						/>
+					{/each}
 				</TimelineTrack>
 
 				<TimelineTrack>
-					<TimelineAudioElement
-						startFrame={0}
-						{pixelsPerFrame}
-						frameLength={48}
-						label="Voice Acting"
-					/>
+					{#each projectData.audio as element}
+						<TimelineAudioElement
+							startFrame={element.startFrame}
+							{pixelsPerFrame}
+							frameLength={element.frameLength}
+							label={element.label}
+						/>
+					{/each}
 				</TimelineTrack>
 
 				<TimelinePlayhead {currentFrame} {pixelsPerFrame} />
