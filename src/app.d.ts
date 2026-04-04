@@ -1,12 +1,33 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
 declare global {
-	namespace App {
-		// interface Error {}
-		// interface Locals {}
-		// interface PageData {}
-		// interface PageState {}
-		// interface Platform {}
+	namespace EditorTypes {
+		interface AudioTrackElement {
+			startFrame: number;
+			frameLength: number;
+			label: string;
+		}
+
+		interface ImageTrackElement {
+			startFrame: number;
+			frameLength: number;
+			label: string;
+		}
+
+		interface EmotionTrackElement {
+			startFrame: number;
+		}
+
+		interface ProjectFile {
+			name: string;
+			fps: number;
+			totalFrames: number;
+			audiotracks: {
+				audio: AudioTrackElement[];
+				image: ImageTrackElement[];
+				emotion: EmotionTrackElement[];
+			}[];
+		}
 	}
 }
 

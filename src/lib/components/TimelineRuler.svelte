@@ -3,7 +3,7 @@
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="flex h-full flex-1 border-b border-zinc-700" {onmousedown}>
+<div class="flex h-full flex-1 border-b border-zinc-700 bg-zinc-900" {onmousedown}>
 	{#each Array(totalFrames + 1) as _, i}
 		<div
 			class:h-full={i % fps === 0}

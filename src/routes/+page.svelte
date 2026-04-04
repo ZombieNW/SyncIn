@@ -1,11 +1,14 @@
-<script>
+<script lang="ts">
 	import ControlGrid from '$lib/components/ControlGrid.svelte';
 	import Timeline from '$lib/components/Timeline.svelte';
+	import PropertiesPanel from '$lib/components/PropertiesPanel.svelte';
+
+	let selectedElement = $state(null);
 </script>
 
 <ControlGrid>
 	{#snippet topLeft()}
-		<h1>Properties</h1>
+		<PropertiesPanel {selectedElement} />
 	{/snippet}
 
 	{#snippet topRight()}
@@ -13,6 +16,6 @@
 	{/snippet}
 
 	{#snippet bottom()}
-		<Timeline />
+		<Timeline bind:selectedElement />
 	{/snippet}
 </ControlGrid>

@@ -36,6 +36,14 @@
 	let totalFrames = $derived(durationSeconds * fps);
 	let pixelsPerFrame = $state(5); // Playhead Controls
 
+	// @ts-ignore
+	let { selectedElement = $bindable(null) } = $props();
+
+	// @ts-ignore
+	function selectElement(object) {
+		selectedElement = object;
+	}
+
 	let isDragging = $state(false);
 	let timelineContainer = $state();
 
@@ -111,29 +119,19 @@
 
 				<TimelineTrack>
 					{#each projectData.emotion as element}
-						<TimelineEmotionKeyframe startFrame={element.startFrame} {pixelsPerFrame} />
+						<TimelineEmotionKeyframe {element} {pixelsPerFrame} onClick={selectElement} />
 					{/each}
 				</TimelineTrack>
 
 				<TimelineTrack>
 					{#each projectData.image as element}
-						<TimelineImageElement
-							startFrame={element.startFrame}
-							{pixelsPerFrame}
-							frameLength={element.frameLength}
-							label={element.label}
-						/>
+						<TimelineImageElement {element} {pixelsPerFrame} onClick={selectElement} />
 					{/each}
 				</TimelineTrack>
 
 				<TimelineTrack>
 					{#each projectData.audio as element}
-						<TimelineAudioElement
-							startFrame={element.startFrame}
-							{pixelsPerFrame}
-							frameLength={element.frameLength}
-							label={element.label}
-						/>
+						<TimelineAudioElement {element} {pixelsPerFrame} onClick={selectElement} />
 					{/each}
 				</TimelineTrack>
 
