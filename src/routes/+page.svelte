@@ -1,5 +1,6 @@
 <script>
 	import ControlGrid from '$lib/components/ControlGrid.svelte';
+	import Timeline from '$lib/components/Timeline.svelte';
 </script>
 
 <ControlGrid>
@@ -12,6 +13,6 @@
 	{/snippet}
 
 	{#snippet bottom()}
-		<h1>Editor</h1>
+		<Timeline />
 	{/snippet}
 </ControlGrid>
