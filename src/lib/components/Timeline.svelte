@@ -90,12 +90,7 @@
 		>
 			<div class="relative flex h-full min-w-fit flex-col">
 				<TimelineTrack>
-					<TimelineRuler
-						totalFrames={projectData.totalFrames}
-						{fps}
-						{pixelsPerFrame}
-						onmousedown={handleMouseDown}
-					/>
+					<TimelineRuler {projectData} {pixelsPerFrame} onmousedown={handleMouseDown} />
 				</TimelineTrack>
 
 				<TimelineTrack>
