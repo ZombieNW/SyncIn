@@ -1,7 +1,7 @@
 <script lang="ts">
 	interface Props {
 		pixelsPerFrame: number;
-		element: EditorTypes.ImageTrackElement;
+		element: EditorTypes.AudioTrackElement;
 		onClick?: (element: EditorTypes.AudioTrackElement) => void;
 	}
 
