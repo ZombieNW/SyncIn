@@ -8,36 +8,12 @@
 	import TimelineImageElement from './TimelineImageElement.svelte';
 	import TimelineAudioElement from './TimelineAudioElement.svelte';
 
-	let projectData = $state({
-		audio: [
-			{
-				startFrame: 8,
-				frameLength: 48,
-				label: 'Bee'
-			}
-		],
-		emotion: [
-			{
-				startFrame: 12
-			}
-		],
-		image: [
-			{
-				startFrame: 0,
-				frameLength: 36,
-				label: 'Happy'
-			}
-		]
-	});
-
 	let currentFrame = $state(0);
 	let fps = $state(24);
-	let durationSeconds = $state(10);
-	let totalFrames = $derived(durationSeconds * fps);
 	let pixelsPerFrame = $state(5); // Playhead Controls
 
 	// @ts-ignore
-	let { selectedElement = $bindable(null) } = $props();
+	let { selectedElement = $bindable(null), projectData } = $props();
 
 	// @ts-ignore
 	function selectElement(object) {
@@ -54,7 +30,7 @@
 		const offsetX = e.clientX - rect.left + timelineContainer.scrollLeft;
 
 		const frame = Math.round(offsetX / pixelsPerFrame);
-		currentFrame = Math.max(0, Math.min(totalFrames, frame));
+		currentFrame = Math.max(0, Math.min(projectData.totalFrames, frame));
 	}
 
 	// @ts-ignore
@@ -114,23 +90,28 @@
 		>
 			<div class="relative flex h-full min-w-fit flex-col">
 				<TimelineTrack>
-					<TimelineRuler {totalFrames} {fps} {pixelsPerFrame} onmousedown={handleMouseDown} />
+					<TimelineRuler
+						totalFrames={projectData.totalFrames}
+						{fps}
+						{pixelsPerFrame}
+						onmousedown={handleMouseDown}
+					/>
 				</TimelineTrack>
 
 				<TimelineTrack>
-					{#each projectData.emotion as element}
+					{#each projectData.tracks.emotion as element}
 						<TimelineEmotionKeyframe {element} {pixelsPerFrame} onClick={selectElement} />
 					{/each}
 				</TimelineTrack>
 
 				<TimelineTrack>
-					{#each projectData.image as element}
+					{#each projectData.tracks.image as element}
 						<TimelineImageElement {element} {pixelsPerFrame} onClick={selectElement} />
 					{/each}
 				</TimelineTrack>
 
 				<TimelineTrack>
-					{#each projectData.audio as element}
+					{#each projectData.tracks.audio as element}
 						<TimelineAudioElement {element} {pixelsPerFrame} onClick={selectElement} />
 					{/each}
 				</TimelineTrack>

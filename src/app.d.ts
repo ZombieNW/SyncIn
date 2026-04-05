@@ -3,12 +3,14 @@
 declare global {
 	namespace EditorTypes {
 		interface AudioTrackElement {
+			wav: string;
 			startFrame: number;
 			frameLength: number;
 			label: string;
 		}
 
 		interface ImageTrackElement {
+			faceOpen: number;
 			startFrame: number;
 			frameLength: number;
 			label: string;
@@ -16,13 +18,15 @@ declare global {
 
 		interface EmotionTrackElement {
 			startFrame: number;
+			eyeSet: string;
+			mouthSet: string;
 		}
 
 		interface ProjectFile {
 			name: string;
 			fps: number;
 			totalFrames: number;
-			audiotracks: {
+			tracks: {
 				audio: AudioTrackElement[];
 				image: ImageTrackElement[];
 				emotion: EmotionTrackElement[];
