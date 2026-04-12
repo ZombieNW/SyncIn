@@ -2,10 +2,14 @@
 	import ControlGrid from '$lib/components/ControlGrid.svelte';
 	import Timeline from '$lib/components/Timeline.svelte';
 	import PropertiesPanel from '$lib/components/PropertiesPanel.svelte';
+	import VideoPlayback from '$lib/components/VideoPlayback.svelte';
+
+	let currentFrame = $state(0);
 
 	let projectData = $state({
 		name: 'Untitled Project',
 		fps: 24,
+		resolution: { width: 512, height: 512 },
 		totalFrames: 24 * 10,
 		tracks: {
 			audio: [
@@ -42,10 +46,10 @@
 	{/snippet}
 
 	{#snippet topRight()}
-		<h1>Video Playback</h1>
+		<VideoPlayback {projectData} bind:currentFrame />
 	{/snippet}
 
 	{#snippet bottom()}
-		<Timeline bind:selectedElement {projectData} />
+		<Timeline bind:selectedElement {projectData} bind:currentFrame />
 	{/snippet}
 </ControlGrid>

@@ -26,11 +26,15 @@ declare global {
 			name: string;
 			fps: number;
 			totalFrames: number;
+			resolution: {
+				width: number;
+				height: number;
+			};
 			tracks: {
 				audio: AudioTrackElement[];
 				image: ImageTrackElement[];
 				emotion: EmotionTrackElement[];
-			}[];
+			};
 		}
 	}
 }

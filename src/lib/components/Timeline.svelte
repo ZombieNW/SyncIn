@@ -8,12 +8,11 @@
 	import TimelineImageElement from './TimelineImageElement.svelte';
 	import TimelineAudioElement from './TimelineAudioElement.svelte';
 
-	let currentFrame = $state(0);
 	let fps = $state(24);
 	let pixelsPerFrame = $state(5); // Playhead Controls
 
 	// @ts-ignore
-	let { selectedElement = $bindable(null), projectData } = $props();
+	let { selectedElement = $bindable(null), projectData, currentFrame = $bindable(0) } = $props();
 
 	// @ts-ignore
 	function selectElement(object) {
