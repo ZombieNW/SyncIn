@@ -2,10 +2,48 @@
 	interface Props {
 		pixelsPerFrame: number;
 		element: EditorTypes.AudioTrackElement;
+		projectTotalFrames: number;
 		onClick?: (element: EditorTypes.AudioTrackElement) => void;
 	}
 
-	let { pixelsPerFrame, element, onClick: onClickProp = () => {} }: Props = $props();
+	let {
+		pixelsPerFrame,
+		element,
+		onClick: onClickProp = () => {},
+		projectTotalFrames
+	}: Props = $props();
+
+	let isDragging = $state(false);
+	let startMouseX = $state(0);
+	let initialStartFrame = $state(0);
+
+	function handleMouseDown(e: MouseEvent) {
+		// Prevent event from bubbling up to the Ruler/Timeline click handler
+		e.stopPropagation();
+
+		isDragging = true;
+		startMouseX = e.clientX;
+		initialStartFrame = element.startFrame;
+
+		window.addEventListener('mousemove', handleMouseMove);
+		window.addEventListener('mouseup', handleMouseUp);
+	}
+
+	function handleMouseMove(e: MouseEvent) {
+		if (!isDragging) return;
+		const deltaX = e.clientX - startMouseX;
+		const deltaFrames = Math.round(deltaX / pixelsPerFrame);
+		const maxFrame = projectTotalFrames - element.frameLength;
+		const newFrame = initialStartFrame + deltaFrames;
+
+		element.startFrame = Math.max(0, Math.min(maxFrame, newFrame));
+	}
+
+	function handleMouseUp() {
+		isDragging = false;
+		window.removeEventListener('mousemove', handleMouseMove);
+		window.removeEventListener('mouseup', handleMouseUp);
+	}
 </script>
 
 <div class="relative flex h-full items-center">
@@ -14,9 +52,12 @@
 	<div
 		class="absolute inset-y-1 rounded-lg bg-indigo-600 hover:cursor-pointer"
 		onclick={() => onClickProp(element)}
+		class:opacity-80={isDragging}
+		onmousedown={handleMouseDown}
 		style="
             left: {element.startFrame * pixelsPerFrame}px; 
             width: {element.frameLength * pixelsPerFrame}px;
+            z-index: {isDragging ? 50 : 10};
         "
 	>
 		<h2 class="flex w-full items-center rounded-t-xl bg-indigo-700 px-2">

@@ -95,19 +95,34 @@
 
 				<TimelineTrack>
 					{#each projectData.tracks.emotion as element}
-						<TimelineEmotionKeyframe {element} {pixelsPerFrame} onClick={selectElement} />
+						<TimelineEmotionKeyframe
+							{element}
+							{pixelsPerFrame}
+							onClick={selectElement}
+							projectTotalFrames={projectData.totalFrames}
+						/>
 					{/each}
 				</TimelineTrack>
 
 				<TimelineTrack>
 					{#each projectData.tracks.image as element}
-						<TimelineImageElement {element} {pixelsPerFrame} onClick={selectElement} />
+						<TimelineImageElement
+							{element}
+							{pixelsPerFrame}
+							onClick={selectElement}
+							projectTotalFrames={projectData.totalFrames}
+						/>
 					{/each}
 				</TimelineTrack>
 
 				<TimelineTrack>
 					{#each projectData.tracks.audio as element}
-						<TimelineAudioElement {element} {pixelsPerFrame} onClick={selectElement} />
+						<TimelineAudioElement
+							{element}
+							{pixelsPerFrame}
+							onClick={selectElement}
+							projectTotalFrames={projectData.totalFrames}
+						/>
 					{/each}
 				</TimelineTrack>
 
