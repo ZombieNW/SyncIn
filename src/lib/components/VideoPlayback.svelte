@@ -46,6 +46,25 @@
 		ctx.fillText(`Frame: ${currentFrame}`, centerX, 40);
 	}
 
+	function handleKeydown(event: KeyboardEvent) {
+		if (['INPUT', 'TEXTAREA'].includes((event.target as HTMLElement)?.tagName)) return;
+
+		switch (event.code) {
+			case 'Space':
+				event.preventDefault();
+				togglePlay();
+				break;
+			case 'ArrowLeft':
+				event.preventDefault();
+				stepBackward();
+				break;
+			case 'ArrowRight':
+				event.preventDefault();
+				stepForward();
+				break;
+		}
+	}
+
 	function togglePlay(): void {
 		isPlaying = !isPlaying;
 		if (isPlaying) {
@@ -91,6 +110,8 @@
 	});
 </script>
 
+<svelte:window onkeydown={handleKeydown} />
+
 <div class="flex h-full flex-col overflow-hidden select-none">
 	<!-- Canvas Preview -->
 	<div class="flex grow items-center justify-center overflow-hidden p-3">
@@ -125,7 +146,11 @@
 				<FontAwesomeIcon icon={faBackwardStep} />
 			</button>
 			<button onclick={togglePlay} class="transport-btn" title={isPlaying ? 'Pause' : 'Play'}>
-				<FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
+				{#if isPlaying}
+					<FontAwesomeIcon icon={faPause} />
+				{:else}
+					<FontAwesomeIcon icon={faPlay} />
+				{/if}
 			</button>
 			<button onclick={stepForward} class="transport-btn" title="Step Forward">
 				<FontAwesomeIcon icon={faForwardStep} />
