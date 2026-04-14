@@ -8,6 +8,7 @@
 		faBackwardStep
 	} from '@fortawesome/free-solid-svg-icons';
 	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
+	import { getElementsAtFrame } from '$lib/editor';
 
 	let {
 		projectData,
@@ -38,12 +39,13 @@
 
 	// face animation logic
 	function drawFrameLayers(ctx: CanvasRenderingContext2D): void {
+		const elements = getElementsAtFrame(projectData, currentFrame);
 		ctx.fillStyle = '#333';
 		ctx.font = '16px sans-serif';
 		ctx.textAlign = 'center';
 
 		const centerX = projectData.resolution.width / 2;
-		ctx.fillText(`Frame: ${currentFrame}`, centerX, 40);
+		ctx.fillText(JSON.stringify(elements), centerX, 40);
 	}
 
 	function handleKeydown(event: KeyboardEvent) {

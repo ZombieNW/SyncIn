@@ -22,6 +22,12 @@ declare global {
 			mouthSet: string;
 		}
 
+		interface ActiveElements {
+			audio: AudioTrackElement[];
+			image: ImageTrackElement[];
+			currentEmotion: EmotionTrackElement | null;
+		}
+
 		interface ProjectFile {
 			name: string;
 			fps: number;
