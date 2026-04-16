@@ -23,8 +23,8 @@ declare global {
 		}
 
 		interface ActiveElements {
-			audio: AudioTrackElement[];
-			image: ImageTrackElement[];
+			audio: AudioTrackElement;
+			image: ImageTrackElement;
 			currentEmotion: EmotionTrackElement | null;
 		}
 

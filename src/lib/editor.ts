@@ -26,8 +26,8 @@ export function getElementsAtFrame(
 
 	// return found items
 	return {
-		audio: activeAudio,
-		image: activeImage,
+		audio: activeAudio[0],
+		image: activeImage[0],
 		currentEmotion
 	};
 }

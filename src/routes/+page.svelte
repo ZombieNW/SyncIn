@@ -22,17 +22,17 @@
 			],
 			emotion: [
 				{
-					startFrame: 12,
-					eyeSet: 'sex',
-					mouthSet: 'fart'
+					startFrame: 0,
+					eyeSet: 'default',
+					mouthSet: 'default'
 				}
 			],
 			image: [
 				{
 					startFrame: 0,
 					frameLength: 36,
-					label: 'Happy',
-					faceOpen: 12
+					label: 'Data',
+					faceOpen: 1
 				}
 			]
 		}

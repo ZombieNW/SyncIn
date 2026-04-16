@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { drawFrameLayers } from '$lib/animator';
 	import {
 		faPlay,
 		faPause,
@@ -8,7 +9,6 @@
 		faBackwardStep
 	} from '@fortawesome/free-solid-svg-icons';
 	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
-	import { getElementsAtFrame } from '$lib/editor';
 
 	let {
 		projectData,
@@ -34,18 +34,7 @@
 
 		ctx.fillStyle = '#e7e7e7';
 		ctx.fillRect(0, 0, width, height);
-		drawFrameLayers(ctx);
-	}
-
-	// face animation logic
-	function drawFrameLayers(ctx: CanvasRenderingContext2D): void {
-		const elements = getElementsAtFrame(projectData, currentFrame);
-		ctx.fillStyle = '#333';
-		ctx.font = '16px sans-serif';
-		ctx.textAlign = 'center';
-
-		const centerX = projectData.resolution.width / 2;
-		ctx.fillText(JSON.stringify(elements), centerX, 40);
+		drawFrameLayers(ctx, projectData, currentFrame);
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
