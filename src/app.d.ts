@@ -32,6 +32,7 @@ declare global {
 			name: string;
 			fps: number;
 			totalFrames: number;
+			audio: HTMLAudioElement;
 			resolution: {
 				width: number;
 				height: number;

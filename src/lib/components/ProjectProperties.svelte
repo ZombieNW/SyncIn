@@ -1,4 +1,5 @@
 <script lang="ts">
+	import AudioProperty from './AudioProperty.svelte';
 	import PropertyField from './PropertyField.svelte';
 
 	interface Props {
@@ -12,3 +13,5 @@
 <PropertyField label="Name" bind:value={projectData.name} />
 <PropertyField label="FPS" bind:value={projectData.fps} type="number" />
 <PropertyField label="Total Frames" bind:value={projectData.totalFrames} type="number" />
+
+<AudioProperty label="Audio" bind:audio={projectData.audio} />

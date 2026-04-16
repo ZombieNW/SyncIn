@@ -121,6 +121,7 @@
 							{pixelsPerFrame}
 							onClick={selectElement}
 							projectTotalFrames={projectData.totalFrames}
+							audio={projectData.audio}
 						/>
 					{/each}
 				</TimelineTrack>
